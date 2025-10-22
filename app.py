@@ -29,9 +29,9 @@ def get_connection():
     )
 
 # Función para obtener una tabla
-def obtener_tabla(nombre_tabla):
+def obtener_tabla():
     conexion = get_connection()
-    query = f"SELECT * FROM {nombre_tabla};"
+    query = f"SELECT * FROM tabla_prueba;"
     df = pd.read_sql(query, conexion)
     conexion.close()
     return df
@@ -39,11 +39,11 @@ def obtener_tabla(nombre_tabla):
 # Interfaz Streamlit
 st.title("Visualizador de Tablas - Railway DB")
 
-tabla = st.text_input("Nombre de la tabla", "usuarios")
+
 
 if st.button("Mostrar tabla"):
     try:
-        datos = obtener_tabla(tabla)
+        datos = obtener_tabla()
         st.dataframe(datos, use_container_width=True)
     except Exception as e:
         st.error(f"Error: {e}")
