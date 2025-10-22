@@ -32,7 +32,7 @@ def get_connection():
 def obtener_tabla():
     conexion = get_connection()
     query = f"SELECT * FROM tabla_prueba;"
-    df = pd.read_sql(query, conexion,)
+    df = pd.read_sql(query, conexion)
     conexion.close()
     return df
 
@@ -43,7 +43,7 @@ if st.button("Mostrar tabla"):
     try:
         datos = obtener_tabla().reset_index(drop=True)
         st.success("Tabla obtenida correctamente.")
-        st.dataframe(datos, use_container_width=True)
+        st.dataframe(datos, use_container_width=True, index = False)
     except Exception as e:
         st.error(f"Error: {e}")
 
