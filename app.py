@@ -41,9 +41,15 @@ st.title("Visualizador de Tablas - Railway DB")
 
 if st.button("Mostrar tabla"):
     try:
-        datos = obtener_tabla().reset_index(drop=True)
-        st.success("Tabla obtenida correctamente.")
-        st.dataframe(datos, use_container_width=True, index = False)
+        # El spinner se usa con 'with' para que muestre mientras se ejecuta el bloque
+        with st.spinner("Cargando tabla, por favor espera..."):
+            datos = obtener_tabla().reset_index(drop=True)
+            # Puedes agregar un pequeño sleep si quieres simular carga
+            # import time; time.sleep(1)
+        
+        st.success("Tabla obtenida correctamente ✅")
+        st.dataframe(datos, use_container_width=True)
+        
     except Exception as e:
         st.error(f"Error: {e}")
 
